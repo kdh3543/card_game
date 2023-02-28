@@ -30,4 +30,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+}
+
+.cardShow {
+  visibility: visible;
+}
+
+.cardHide {
+  visibility: hidden;
 }
