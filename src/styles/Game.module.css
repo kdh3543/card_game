@@ -1,8 +1,16 @@
 .main {
   min-height: 100vh;
-  display: flex;
   align-items: center;
   background-color: white;
+}
+
+.answerCount {
+  width: 100%;
+  text-align: center;
+  padding-top: 50px;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: "Manrope";
 }
 
 .cardContainer {
@@ -10,10 +18,11 @@
   width: 70%;
   display: flex;
   margin: auto;
+  margin-top: 50px;
   min-height: 700px;
   justify-content: space-around;
   flex-wrap: wrap;
-  font-size: 20px;
+  font-size: 30px;
 }
 
 .card {
@@ -31,6 +40,20 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  border-radius: 15px;
+  position: relative;
+  cursor: not-allowed;
+}
+.cardCheckedContent {
+  width: 200px;
+  height: 300px;
+  background-color: gray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 15px;
+  position: relative;
 }
 
 .cardShow {
@@ -39,4 +62,9 @@
 
 .cardHide {
   visibility: hidden;
+}
+
+.cardForbidden {
+  cursor: not-allowed;
+  visibility: visible;
 }
