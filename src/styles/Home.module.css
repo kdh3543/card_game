@@ -1,19 +1,18 @@
 .main {
-  display: flex;
   /* flex-direction: column; */
   /* justify-content: space-between; */
-  align-items: center;
-  justify-content: center;
+  text-align: center;
+  padding-top: 300px;
   /* padding: 6rem; */
   min-height: 100vh;
   background-color: antiquewhite;
 }
 
 .navbar {
-  display: flex;
   /* height: 50px; */
   width: 100%;
 }
+
 .playBtn {
   padding: 10px;
   font-size: 25px;
@@ -23,8 +22,21 @@
   border-radius: 15px;
   background-color: gray;
   color: white;
-  box-shadow: 1px 1px;
+  border-color: aliceblue;
+  margin-top: 10px;
   /* border: n; */
+}
+
+.forbiddenBtn {
+  padding: 10px;
+  font-size: 25px;
+  margin: auto;
+  font-weight: bold;
+  border-radius: 15px;
+  border-color: aliceblue;
+  background-color: #80808080;
+  color: white;
+  margin-top: 10px;
 }
 
 /* Enable hover only on non-touch devices */
