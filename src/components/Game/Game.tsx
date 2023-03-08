@@ -9,27 +9,27 @@ function Game() {
   const [boolArray, setBoolArray] = useState<number[]>([]);
   const [flip, setFlip] = useState<boolean[]>([]);
   const [cardCount, setCardCount] = useState(0);
-  const [answer, setAnswer] = useState<number[]>([]);
+  const [choice, setChoice] = useState<number[]>([]);
   const [answerCount, setAnswerCount] = useState(0);
-  const [time, setTime] = useState(5);
+  const [time, setTime] = useState(60);
   const [success, setSuccess] = useState("");
   const router = useRouter();
-  let initNum: any = router.query.level;
+  const initNum: any = router.query.level;
   const choiceCard = (index: number, value: number) => {
-    setAnswer([...answer, value]);
+    setChoice([...choice, value]);
 
     let tempArr = flip;
     tempArr[index] = true;
     setCardCount(cardCount + 1);
     setFlip([...tempArr]);
   };
-
   useEffect(() => {
     if (cardCount === 2) {
-      if (answer[answer.length - 1] === answer[answer.length - 2]) {
-        setAnswerArray([...answerArray, answer[answer.length - 1]]);
+      if (choice[choice.length - 1] === choice[choice.length - 2]) {
+        setAnswerArray([...answerArray, choice[choice.length - 1]]);
         setAnswerCount(answerCount + 1);
       } else {
+        setChoice([]);
         setTimeout(() => {
           if (boolArray.length === 0) {
             setFlip(Array.from({ length: initNum }, () => false));
@@ -58,6 +58,7 @@ function Game() {
 
     setBoolArray(num);
   }, [answerArray]);
+
   useEffect(() => {
     if (!router.query.level) return;
     setFlip(Array.from({ length: initNum }, () => true));
@@ -77,11 +78,16 @@ function Game() {
       setSuccess("FAILED!!");
       return;
     }
-    setTimeout(() => {
+    const remainTime = setTimeout(() => {
       setTime(time - 1);
     }, 1000);
-    console.log(answerArray);
+    if (boolArray.every((value) => value !== -1) && boolArray.length != 0) {
+      setSuccess("SUCCESS!!");
+      clearTimeout(remainTime);
+      return;
+    }
   }, [time]);
+  useEffect(() => {}, [boolArray]);
   return (
     <>
       <Head>
