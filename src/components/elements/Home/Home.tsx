@@ -4,20 +4,27 @@ import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import modalSlice, { modalSliceAction } from "@/feature/modal/modalSlice";
+import HowToPlayModal from "@/components/common/modal/HowToPlayModal";
 
 // const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const [choice, setChoice] = useState("");
   const router = useRouter();
+  const dispatch = useDispatch();
   const gameStart = () => {
-    console.log(choice);
     if (!choice) return;
     router.push(`/game?level=${parseInt(choice)}`);
   };
   const selectLevel = (e: any) => {
-    console.log(e.target.value);
     setChoice(e.target.value);
+  };
+
+  const openModal = () => {
+    console.log("???");
+    dispatch(modalSliceAction.setIsOpenHowToPlayModal(true));
   };
   return (
     <>
@@ -47,11 +54,12 @@ export default function Home() {
           </button>
         </div>
         <div>
-          <button className={styles.playBtn} onClick={gameStart}>
+          <button className={styles.playBtn} onClick={openModal}>
             {"HOW TO PLAY"}
           </button>
         </div>
       </main>
+      <HowToPlayModal />
     </>
   );
 }
