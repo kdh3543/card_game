@@ -1,12 +1,15 @@
 import Head from "next/head";
-import styles from "@/styles/Home.module.css";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { modalSliceAction } from "@/feature/modal/modalSlice";
+// import { modalSliceAction } from "@/feature/modal/modalSlice";
 import HowToPlayModal from "@/components/common/modal/HowToPlayModal";
 import styled from "styled-components";
-// import styled from "";
+
+interface StylePropsType {
+  backgroundColor?: string;
+  cursor?: string;
+}
 
 const Main = styled.main`
   text-align: center;
@@ -15,21 +18,23 @@ const Main = styled.main`
   background-color: antiquewhite;
 `;
 
-const PlayButton = styled.button`
+const PlayButton = styled.button<StylePropsType>`
   padding: 10px;
   font-size: 25px;
   margin: auto;
-  cursor: pointer;
+  cursor: ${(props) => props.cursor};
   font-weight: bold;
   border-radius: 15px;
-  background-color: gray;
+  background-color: ${(props) => props.backgroundColor};
   color: white;
   border-color: aliceblue;
   margin-top: 10px;
+  disabled: true;
 `;
 
 export default function Home() {
   const [choice, setChoice] = useState("");
+  const [modalState, setModalState] = useState(false);
   const router = useRouter();
   const dispatch = useDispatch();
   const gameStart = () => {
@@ -41,8 +46,11 @@ export default function Home() {
   };
 
   const openModal = () => {
-    console.log("???");
-    dispatch(modalSliceAction.setIsOpenHowToPlayModal(true));
+    setModalState(true);
+    // dispatch(modalSliceAction.setIsOpenHowToPlayModal(true));
+  };
+  const closeModal = () => {
+    setModalState(false);
   };
   return (
     <>
@@ -54,7 +62,6 @@ export default function Home() {
       </Head>
       <Main>
         <div>
-          테스트
           <select onChange={(e) => selectLevel(e)}>
             <option value="">{"단계"}</option>
             <option value="8">{"1"}</option>
@@ -64,7 +71,12 @@ export default function Home() {
         </div>
 
         <div>
-          <PlayButton onClick={gameStart}>
+          <PlayButton
+            onClick={gameStart}
+            cursor={choice ? "pointer" : "not-allowed"}
+            backgroundColor={choice ? "gray" : "#80808080"}
+            disabled={choice ? false : true}
+          >
             {/* <button
             className={choice ? styles.playBtn : styles.forbiddenBtn}
             onClick={gameStart}
@@ -74,12 +86,16 @@ export default function Home() {
           </PlayButton>
         </div>
         <div>
-          <button className={styles.playBtn} onClick={openModal}>
+          <PlayButton
+            cursor="pointer"
+            backgroundColor="gray"
+            onClick={openModal}
+          >
             {"HOW TO PLAY"}
-          </button>
+          </PlayButton>
         </div>
       </Main>
-      <HowToPlayModal />
+      {modalState && <HowToPlayModal state={modalState} onClose={closeModal} />}
     </>
   );
 }

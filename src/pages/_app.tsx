@@ -5,9 +5,11 @@ import { GlobalStyle } from "@/styles/global-style";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <Provider store={store}>
+    <>
       <GlobalStyle />
-      <Component {...pageProps} />
-    </Provider>
+      <Provider store={store}>
+        <Component {...pageProps} />
+      </Provider>
+    </>
   );
 }
