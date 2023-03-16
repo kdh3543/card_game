@@ -59,6 +59,7 @@ const Back = styled.button`
   border: none;
   cursor: pointer;
   font-weight: bold;
+  color: black;
 `;
 
 const Level = styled.div`
@@ -68,22 +69,6 @@ const Level = styled.div`
   justify-content: center;
   padding: 10px;
 `;
-
-// const Content = styled.div<StylePropsType>`
-//   width: 200px;
-//   height: 200px;
-//   background-color: gray;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   cursor: ${(props) => props.cursor};
-//   border-radius: 15px;
-//   position: relative;
-// `;
-
-// const Card = styled.div<StylePropsType>`
-//   visibility: ${(props) => props.visibility};
-// `;
 
 const CardContainer = styled.div<{ flipped: boolean }>`
   position: relative;
@@ -107,17 +92,26 @@ const CardContainer = styled.div<{ flipped: boolean }>`
     flipped ? "rotateY(180deg)" : "rotateY(0deg)"};
 `;
 
-const CardFront = styled.div<{ flipped: boolean }>`
+const CardBack = styled.div<{ flipped: boolean }>`
   background-color: gray;
   color: white;
   cursor: pointer;
+  background-color: white;
+  border: 3px solid blue;
 `;
 
-const CardBack = styled.div<{ flipped: boolean }>`
+const CardFront = styled.div<{ flipped: boolean }>`
   color: black;
   background-color: gray;
   cursor: not-allowed;
   transform: rotateY(180deg);
+  display: flex;
+  align-items: center;
+  justify-contents: center;
+`;
+
+const CardBackImg = styled.img`
+  width: 50%;
 `;
 function Game() {
   const [cardArray, setCardArray] = useState<number[]>([]);
@@ -235,7 +229,7 @@ function Game() {
           {cardArray.map((value: number, index: number) => (
             <Level key={index}>
               <CardContainer flipped={flip[index]} onClick={handleClick}>
-                <CardFront
+                <CardBack
                   onClick={
                     flip[index]
                       ? (e) => e.preventDefault()
@@ -243,9 +237,9 @@ function Game() {
                   }
                   flipped={flip[index]}
                 >
-                  front
-                </CardFront>
-                <CardBack flipped={flip[index]}>{value}</CardBack>
+                  <CardBackImg src="./card_background.png" alt="" />
+                </CardBack>
+                <CardFront flipped={flip[index]}>{value}</CardFront>
               </CardContainer>
               {/* <Content
                 cursor={flip[index] ? "not-allowed" : "pointer"}

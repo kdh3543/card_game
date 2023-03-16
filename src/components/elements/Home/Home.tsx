@@ -77,11 +77,6 @@ export default function Home() {
             backgroundColor={choice ? "gray" : "#80808080"}
             disabled={choice ? false : true}
           >
-            {/* <button
-            className={choice ? styles.playBtn : styles.forbiddenBtn}
-            onClick={gameStart}
-            disabled={choice ? false : true}
-          > */}
             {"PLAY THE GAME"}
           </PlayButton>
         </div>
