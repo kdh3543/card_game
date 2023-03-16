@@ -1,14 +1,32 @@
 import Head from "next/head";
-import Image from "next/image";
-import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import modalSlice, { modalSliceAction } from "@/feature/modal/modalSlice";
+import { modalSliceAction } from "@/feature/modal/modalSlice";
 import HowToPlayModal from "@/components/common/modal/HowToPlayModal";
+import styled from "styled-components";
+// import styled from "";
 
-// const inter = Inter({ subsets: ["latin"] });
+const Main = styled.main`
+  text-align: center;
+  padding-top: 300px;
+  min-height: 100vh;
+  background-color: antiquewhite;
+`;
+
+const PlayButton = styled.button`
+  padding: 10px;
+  font-size: 25px;
+  margin: auto;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 15px;
+  background-color: gray;
+  color: white;
+  border-color: aliceblue;
+  margin-top: 10px;
+`;
 
 export default function Home() {
   const [choice, setChoice] = useState("");
@@ -34,7 +52,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         {/* <link rel="icon" href="/favicon.ico" /> */}
       </Head>
-      <main className={styles.main}>
+      <Main>
         <div>
           <select onChange={(e) => selectLevel(e)}>
             <option value="">{"단계"}</option>
@@ -45,20 +63,21 @@ export default function Home() {
         </div>
 
         <div>
-          <button
+          <PlayButton onClick={gameStart}>
+            {/* <button
             className={choice ? styles.playBtn : styles.forbiddenBtn}
             onClick={gameStart}
             disabled={choice ? false : true}
-          >
+          > */}
             {"PLAY THE GAME"}
-          </button>
+          </PlayButton>
         </div>
         <div>
           <button className={styles.playBtn} onClick={openModal}>
             {"HOW TO PLAY"}
           </button>
         </div>
-      </main>
+      </Main>
       <HowToPlayModal />
     </>
   );
