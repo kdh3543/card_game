@@ -54,6 +54,7 @@ export default function Home() {
       </Head>
       <Main>
         <div>
+          테스트
           <select onChange={(e) => selectLevel(e)}>
             <option value="">{"단계"}</option>
             <option value="8">{"1"}</option>
