@@ -3,6 +3,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import GameTimer from "./_fragments/GameTimer";
 
 interface StylePropsType {
   backgroundColor?: string;
@@ -211,6 +212,7 @@ function Game() {
         <title>카드 맞추기</title>
       </Head>
       <Main>
+        {/* <GameTimer /> */}
         <Count>
           {"REMAIN TIME:"} {time}
         </Count>

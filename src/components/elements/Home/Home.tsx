@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 // import { modalSliceAction } from "@/feature/modal/modalSlice";
 import HowToPlayModal from "@/components/common/modal/HowToPlayModal";
@@ -52,6 +52,7 @@ export default function Home() {
   const closeModal = () => {
     setModalState(false);
   };
+
   return (
     <>
       <Head>
